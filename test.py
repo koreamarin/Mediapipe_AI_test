@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 actions = ['come', 'away', 'spin']
 seq_length = 30
 
-model = load_model('models/model2_1.0.h5')
+model = load_model('models/model.h5')
 
 # MediaPipe hands model
 mp_hands = mp.solutions.hands
@@ -82,7 +82,7 @@ while cap.isOpened():
                 continue
 
             this_action = '?'
-            if action_seq[-1] == action_seq[-2] == action_seq[-3]:
+            if action_seq[-1] == action_seq[-2] == action_seq[-3]:  # 똑같은 인식이 3번 반복됐을 때 실행
                 this_action = action
 
             cv2.putText(img, f'{this_action.upper()}', org=(int(res.landmark[0].x * img.shape[1]), int(res.landmark[0].y * img.shape[0] + 20)), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), thickness=2)
